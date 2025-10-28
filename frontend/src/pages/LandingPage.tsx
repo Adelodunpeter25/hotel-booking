@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import HotelsSection from '../components/HotelsSection';
 
 // Dynamically import all images from assets folder
 const images = Object.values(
@@ -331,6 +332,9 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Hotels Section */}
+            <HotelsSection />
 
             <Footer />
         </div>
