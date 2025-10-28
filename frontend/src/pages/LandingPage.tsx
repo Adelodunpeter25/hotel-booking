@@ -38,7 +38,8 @@ const LandingPage = () => {
                         <img
                             src={image}
                             alt={`Hotel ${index + 1}`}
-                            className="w-full h-full object-cover"
+                            className={`w-full h-full object-cover transition-transform duration-[5000ms] ease-out ${index === currentImage ? 'scale-125' : 'scale-100'
+                                }`}
                         />
                     </div>
                 ))}
