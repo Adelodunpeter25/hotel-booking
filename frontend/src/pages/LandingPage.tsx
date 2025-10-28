@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 // Dynamically import all images from assets folder
 const images = Object.values(
@@ -26,6 +28,7 @@ const LandingPage = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Header />
             {/* Hero Section */}
             <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden">
                 {/* Background Images */}
@@ -154,6 +157,8 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </div>
     );
 };
