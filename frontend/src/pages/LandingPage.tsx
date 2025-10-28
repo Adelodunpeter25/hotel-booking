@@ -27,7 +27,7 @@ const LandingPage = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Hero Section */}
-            <div className="relative h-screen overflow-hidden">
+            <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden">
                 {/* Background Images */}
                 {images.map((image, index) => (
                     <div
@@ -44,17 +44,17 @@ const LandingPage = () => {
                     </div>
                 ))}
 
-                <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
-                    <h1 className="text-5xl md:text-7xl font-bold text-white text-center mb-6">
+                <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white text-center mb-4 sm:mb-6">
                         Find Your Perfect Stay
                     </h1>
-                    <p className="text-xl md:text-2xl text-white text-center mb-12 max-w-2xl">
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white text-center mb-8 sm:mb-12 max-w-2xl px-4">
                         Discover amazing hotels worldwide with the best rates and instant confirmation
                     </p>
 
                     {/* Search Form */}
-                    <form onSubmit={handleSearch} className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-4xl">
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <form onSubmit={handleSearch} className="bg-white rounded-lg shadow-2xl p-4 sm:p-6 w-full max-w-4xl mx-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Check-in
@@ -95,7 +95,7 @@ const LandingPage = () => {
                                 />
                             </div>
 
-                            <div className="flex items-end">
+                            <div className="sm:col-span-2 md:col-span-1 flex items-end">
                                 <button
                                     type="submit"
                                     className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold py-3 px-6 rounded-lg transition duration-200"
@@ -109,13 +109,13 @@ const LandingPage = () => {
             </div>
 
             {/* Features Section */}
-            <div className="py-20 px-4">
+            <div className="py-12 sm:py-16 md:py-20 px-4">
                 <div className="max-w-7xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-10 sm:mb-16">
                         Why Choose Us
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
                         <div className="text-center">
                             <div className="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <svg className="w-10 h-10 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
