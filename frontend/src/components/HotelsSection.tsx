@@ -164,7 +164,10 @@ const HotelsSection = () => {
                                                 ${filteredHotels[0].price}
                                                 <span className="text-sm font-normal text-white/80">/night</span>
                                             </p>
-                                            <button className="bg-white hover:bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200">
+                                            <button 
+                                                onClick={() => window.location.href = `/hotel/${filteredHotels[0].id}`}
+                                                className="bg-white hover:bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200"
+                                            >
                                                 View
                                             </button>
                                         </div>
@@ -203,10 +206,18 @@ const HotelsSection = () => {
                                                 {filteredHotels[1].name}
                                             </h3>
                                             <p className="text-white/90 text-sm md:text-base mb-2">{filteredHotels[1].type}</p>
-                                            <p className="text-lg md:text-xl font-bold text-white">
-                                                ${filteredHotels[1].price}
-                                                <span className="text-sm font-normal text-white/80">/night</span>
-                                            </p>
+                                            <div className="flex items-center justify-between">
+                                                <p className="text-lg md:text-xl font-bold text-white">
+                                                    ${filteredHotels[1].price}
+                                                    <span className="text-sm font-normal text-white/80">/night</span>
+                                                </p>
+                                                <button 
+                                                    onClick={() => window.location.href = `/hotel/${filteredHotels[1].id}`}
+                                                    className="bg-white hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-lg transition duration-200 text-sm"
+                                                >
+                                                    View
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -243,10 +254,18 @@ const HotelsSection = () => {
                                                 {filteredHotels[2].name}
                                             </h3>
                                             <p className="text-white/90 text-sm md:text-base mb-2">{filteredHotels[2].type}</p>
-                                            <p className="text-lg md:text-xl font-bold text-white">
-                                                ${filteredHotels[2].price}
-                                                <span className="text-sm font-normal text-white/80">/night</span>
-                                            </p>
+                                            <div className="flex items-center justify-between">
+                                                <p className="text-lg md:text-xl font-bold text-white">
+                                                    ${filteredHotels[2].price}
+                                                    <span className="text-sm font-normal text-white/80">/night</span>
+                                                </p>
+                                                <button 
+                                                    onClick={() => window.location.href = `/hotel/${filteredHotels[2].id}`}
+                                                    className="bg-white hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-lg transition duration-200 text-sm"
+                                                >
+                                                    View
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </motion.div>

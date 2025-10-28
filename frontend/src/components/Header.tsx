@@ -17,7 +17,7 @@ const Header = () => {
 
                         {/* Desktop Navigation - Centered */}
                         <div className="hidden md:flex items-center space-x-8">
-                            <a href="#home" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
+                            <a href="/" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
                                 Home
                             </a>
                             <a href="#hotels" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
@@ -93,7 +93,7 @@ const Header = () => {
                             <div className="flex-1 overflow-y-auto p-4">
                                 <div className="flex flex-col space-y-4">
                                     <a
-                                        href="#home"
+                                        href="/"
                                         className="text-gray-700 hover:text-yellow-600 hover:bg-gray-50 transition duration-200 font-medium px-4 py-3 rounded-lg"
                                         onClick={() => setIsMenuOpen(false)}
                                     >

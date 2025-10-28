@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const HotelDetailsPage = () => {
+    const navigate = useNavigate();
     const [selectedImage, setSelectedImage] = useState(0);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
@@ -56,6 +58,17 @@ const HotelDetailsPage = () => {
             {/* Hero Image Gallery */}
             <div className="pt-14 md:pt-16">
                 <div className="max-w-7xl mx-auto px-4 py-6">
+                    {/* Back to Home Button */}
+                    <button
+                        onClick={() => navigate('/')}
+                        className="flex items-center space-x-2 text-gray-700 hover:text-yellow-600 font-medium mb-4 transition duration-200"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span>Back to Home</span>
+                    </button>
+                    
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-2 h-[400px] md:h-[500px]">
                         {/* Main Image */}
                         <motion.div
@@ -131,7 +144,7 @@ const HotelDetailsPage = () => {
                                 </div>
                             </div>
 
-                            <div className="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-4 py-2 rounded-full font-semibold">
+                            <div className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold">
                                 {hotel.type}
                             </div>
                         </motion.div>
@@ -213,7 +226,7 @@ const HotelDetailsPage = () => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <button className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold py-3 rounded-lg transition duration-200">
+                                        <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded-lg transition duration-200">
                                             Select Room
                                         </button>
                                     </div>
@@ -337,7 +350,7 @@ const HotelDetailsPage = () => {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold py-4 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
                                 >
                                     Book Now
                                 </button>
