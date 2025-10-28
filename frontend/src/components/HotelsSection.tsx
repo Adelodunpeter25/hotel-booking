@@ -1,16 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-
-interface Hotel {
-    id: number;
-    name: string;
-    location: string;
-    type: string;
-    price: number;
-    rating: number;
-    image: string;
-    amenities: string[];
-}
+import type { Hotel } from '../types/hotel';
 
 const HotelsSection = () => {
     const [selectedType, setSelectedType] = useState('All');
@@ -116,8 +106,8 @@ const HotelsSection = () => {
                             key={type}
                             onClick={() => setSelectedType(type)}
                             className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${selectedType === type
-                                    ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black shadow-lg scale-105'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black shadow-lg scale-105'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             {type}
@@ -126,7 +116,7 @@ const HotelsSection = () => {
                 </motion.div>
 
                 {/* Masonry Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[200px]">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[250px]">
                     {filteredHotels.length > 0 && (
                         <>
                             {/* Large Card - Left Column (Spans 2 rows) */}
@@ -190,69 +180,39 @@ const HotelsSection = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.1 }}
-                                    className="md:col-span-3 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                                    className="md:col-span-6 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
                                 >
-                                    {/* Hotel Image */}
-                                    <div className="relative h-48 overflow-hidden">
-                                        <img
-                                            src={filteredHotels[1].image}
-                                            alt={filteredHotels[1].name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center space-x-1">
-                                            <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                            <span className="text-sm font-semibold text-gray-900">{filteredHotels[1].rating}</span>
-                                        </div>
-                                        <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                            <span className="text-xs font-semibold text-white">{filteredHotels[1].type}</span>
-                                        </div>
-                                    </div>
+                                    {/* Background Image */}
+                                    <img
+                                        src={filteredHotels[1].image}
+                                        alt={filteredHotels[1].name}
+                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
 
-                                    {/* Hotel Info */}
-                                    <div className="p-5">
-                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
-                                            {filteredHotels[1].name}
-                                        </h3>
-                                        <p className="text-gray-600 mb-3 flex items-center text-sm">
-                                            <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                            {filteredHotels[1].location}
-                                        </p>
+                                    {/* Gradient Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
-                                        {/* Amenities */}
-                                        <div className="flex flex-wrap gap-2 mb-3">
-                                            {filteredHotels[1].amenities.slice(0, 3).map((amenity) => (
-                                                <span
-                                                    key={amenity}
-                                                    className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
-                                                >
-                                                    {amenity}
-                                                </span>
-                                            ))}
+                                    {/* Content Overlay */}
+                                    <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between">
+                                        <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 self-start">
+                                            <span className="text-sm font-bold text-white">{filteredHotels[1].amenities.length} room(s)</span>
                                         </div>
 
-                                        {/* Price and Button */}
-                                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                                            <div>
-                                                <p className="text-xs text-gray-500">Starting from</p>
-                                                <p className="text-xl font-bold text-gray-900">
-                                                    ${filteredHotels[1].price}
-                                                    <span className="text-sm font-normal text-gray-500">/night</span>
-                                                </p>
-                                            </div>
-                                            <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
-                                                Book Now
-                                            </button>
+                                        <div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
+                                                {filteredHotels[1].name}
+                                            </h3>
+                                            <p className="text-white/90 text-sm md:text-base mb-2">{filteredHotels[1].type}</p>
+                                            <p className="text-lg md:text-xl font-bold text-white">
+                                                ${filteredHotels[1].price}
+                                                <span className="text-sm font-normal text-white/80">/night</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </motion.div>
                             )}
 
-                            {/* Small Card - Bottom Middle */}
+                            {/* Third Card - Bottom Right */}
                             {filteredHotels.length > 2 && (
                                 <motion.div
                                     key={filteredHotels[2].id}
@@ -260,7 +220,7 @@ const HotelsSection = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.2 }}
-                                    className="md:col-span-3 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                                    className="md:col-span-6 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
                                 >
                                     {/* Background Image */}
                                     <img
@@ -273,19 +233,19 @@ const HotelsSection = () => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
                                     {/* Content Overlay */}
-                                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                                        <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30 self-start">
-                                            <span className="text-xs font-semibold text-white">{filteredHotels[2].amenities.length} room(s)</span>
+                                    <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between">
+                                        <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 self-start">
+                                            <span className="text-sm font-bold text-white">{filteredHotels[2].amenities.length} room(s)</span>
                                         </div>
 
                                         <div>
-                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-yellow-400 transition-colors duration-300">
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
                                                 {filteredHotels[2].name}
                                             </h3>
-                                            <p className="text-white/90 text-sm mb-2">{filteredHotels[2].type}</p>
-                                            <p className="text-lg font-bold text-white">
+                                            <p className="text-white/90 text-sm md:text-base mb-2">{filteredHotels[2].type}</p>
+                                            <p className="text-lg md:text-xl font-bold text-white">
                                                 ${filteredHotels[2].price}
-                                                <span className="text-xs font-normal text-white/80">/night</span>
+                                                <span className="text-sm font-normal text-white/80">/night</span>
                                             </p>
                                         </div>
                                     </div>
