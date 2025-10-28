@@ -2,7 +2,7 @@ const Footer = () => {
     return (
         <footer className="bg-gray-900 text-gray-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Company Info */}
                     <div>
                         <h3 className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent mb-4">
@@ -28,33 +28,6 @@ const Footer = () => {
                                 </svg>
                             </a>
                         </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-                        <ul className="space-y-2">
-                            <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
-                                    About Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
-                                    Careers
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
-                                    Press
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
                     </div>
 
                     {/* Support */}
