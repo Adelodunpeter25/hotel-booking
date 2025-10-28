@@ -241,17 +241,17 @@ const HotelDetailsPage = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-6 shadow-2xl sticky top-20"
+                            className="bg-white rounded-2xl p-5 shadow-2xl mt-8 lg:mt-0"
                         >
-                            <div className="mb-6">
+                            <div className="mb-5">
                                 <p className="text-sm text-gray-600 mb-1">Starting from</p>
-                                <p className="text-4xl font-bold text-gray-900">
+                                <p className="text-3xl font-bold text-gray-900">
                                     ${hotel.price}
-                                    <span className="text-lg font-normal text-gray-500">/night</span>
+                                    <span className="text-base font-normal text-gray-500">/night</span>
                                 </p>
                             </div>
 
-                            <form onSubmit={handleBooking} className="space-y-4">
+                            <form onSubmit={handleBooking} className="space-y-3">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Check-in
@@ -260,7 +260,7 @@ const HotelDetailsPage = () => {
                                         type="date"
                                         value={checkIn}
                                         onChange={(e) => setCheckIn(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
                                         required
                                     />
                                 </div>
@@ -273,16 +273,16 @@ const HotelDetailsPage = () => {
                                         type="date"
                                         value={checkOut}
                                         onChange={(e) => setCheckOut(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
                                         required
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Guests
                                     </label>
-                                    <div className="space-y-3">
+                                    <div className="space-y-2">
                                         <div className="flex items-center justify-between">
                                             <span className="text-sm text-gray-700">Adults</span>
                                             <div className="flex items-center space-x-3">
@@ -350,14 +350,10 @@ const HotelDetailsPage = () => {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
                                 >
                                     Book Now
                                 </button>
-
-                                <p className="text-xs text-center text-gray-500">
-                                    Free cancellation up to 24 hours before check-in
-                                </p>
                             </form>
                         </motion.div>
                     </div>
