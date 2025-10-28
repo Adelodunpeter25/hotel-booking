@@ -80,8 +80,8 @@ const HotelsSection = () => {
         }
     ];
 
-    const filteredHotels = selectedType === 'All' 
-        ? hotels 
+    const filteredHotels = selectedType === 'All'
+        ? hotels
         : hotels.filter(hotel => hotel.type === selectedType);
 
     return (
@@ -115,175 +115,181 @@ const HotelsSection = () => {
                         <button
                             key={type}
                             onClick={() => setSelectedType(type)}
-                            className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
-                                selectedType === type
+                            className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${selectedType === type
                                     ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-black shadow-lg scale-105'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                                }`}
                         >
                             {type}
                         </button>
                     ))}
                 </motion.div>
 
-                {/* Hotels Grid - Featured Layout */}
-                <div className="space-y-6">
+                {/* Masonry Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[200px]">
                     {filteredHotels.length > 0 && (
                         <>
-                            {/* Featured Large Hotel Card */}
+                            {/* Large Card - Left Column (Spans 2 rows) */}
                             <motion.div
                                 key={filteredHotels[0].id}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
-                                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                                className="md:col-span-6 md:row-span-2 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
                             >
-                                <div className="grid md:grid-cols-2 gap-0">
-                                    {/* Large Hotel Image */}
-                                    <div className="relative h-64 md:h-full overflow-hidden">
-                                        <img
-                                            src={filteredHotels[0].image}
-                                            alt={filteredHotels[0].name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center space-x-1">
+                                {/* Background Image */}
+                                <img
+                                    src={filteredHotels[0].image}
+                                    alt={filteredHotels[0].name}
+                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                />
+
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+                                {/* Content Overlay */}
+                                <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                                    {/* Top Badges */}
+                                    <div className="flex justify-between items-start">
+                                        <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                                            <span className="text-sm font-bold text-white">{filteredHotels[0].amenities.length} room(s)</span>
+                                        </div>
+                                        <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center space-x-1">
                                             <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
                                             <span className="text-sm font-semibold text-gray-900">{filteredHotels[0].rating}</span>
                                         </div>
-                                        <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-yellow-600 px-4 py-1.5 rounded-full">
-                                            <span className="text-xs font-bold text-black">FEATURED</span>
-                                        </div>
-                                        <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                            <span className="text-xs font-semibold text-white">{filteredHotels[0].type}</span>
-                                        </div>
                                     </div>
 
-                                    {/* Large Hotel Info */}
-                                    <div className="p-8 flex flex-col justify-between">
-                                        <div>
-                                            <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors duration-300">
-                                                {filteredHotels[0].name}
-                                            </h3>
-                                            <p className="text-gray-600 mb-6 flex items-center text-lg">
-                                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                </svg>
-                                                {filteredHotels[0].location}
+                                    {/* Bottom Info */}
+                                    <div>
+                                        <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors duration-300">
+                                            {filteredHotels[0].name}
+                                        </h3>
+                                        <p className="text-white/90 text-lg mb-4">{filteredHotels[0].type}</p>
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-2xl font-bold text-white">
+                                                ${filteredHotels[0].price}
+                                                <span className="text-sm font-normal text-white/80">/night</span>
                                             </p>
-
-                                            {/* Amenities */}
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                {filteredHotels[0].amenities.map((amenity) => (
-                                                    <span
-                                                        key={amenity}
-                                                        className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-full"
-                                                    >
-                                                        {amenity}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Price and Button */}
-                                        <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                                            <div>
-                                                <p className="text-sm text-gray-500 mb-1">Starting from</p>
-                                                <p className="text-4xl font-bold text-gray-900">
-                                                    ${filteredHotels[0].price}
-                                                    <span className="text-lg font-normal text-gray-500">/night</span>
-                                                </p>
-                                            </div>
-                                            <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-8 py-3.5 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
-                                                Book Now
+                                            <button className="bg-white hover:bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200">
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </motion.div>
 
-                            {/* Smaller Hotel Cards Grid */}
+                            {/* Medium Card - Top Right */}
                             {filteredHotels.length > 1 && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {filteredHotels.slice(1, 3).map((hotel, index) => (
-                                        <motion.div
-                                            key={hotel.id}
-                                            initial={{ opacity: 0, y: 30 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.5, delay: (index + 1) * 0.1 }}
-                                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                                            className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
-                                        >
-                                            {/* Hotel Image */}
-                                            <div className="relative h-56 overflow-hidden">
-                                                <img
-                                                    src={hotel.image}
-                                                    alt={hotel.name}
-                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                />
-                                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center space-x-1">
-                                                    <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                    </svg>
-                                                    <span className="text-sm font-semibold text-gray-900">{hotel.rating}</span>
-                                                </div>
-                                                <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                                                    <span className="text-xs font-semibold text-white">{hotel.type}</span>
-                                                </div>
-                                            </div>
+                                <motion.div
+                                    key={filteredHotels[1].id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: 0.1 }}
+                                    className="md:col-span-3 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                                >
+                                    {/* Hotel Image */}
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img
+                                            src={filteredHotels[1].image}
+                                            alt={filteredHotels[1].name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center space-x-1">
+                                            <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                            <span className="text-sm font-semibold text-gray-900">{filteredHotels[1].rating}</span>
+                                        </div>
+                                        <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                                            <span className="text-xs font-semibold text-white">{filteredHotels[1].type}</span>
+                                        </div>
+                                    </div>
 
-                                            {/* Hotel Info */}
-                                            <div className="p-6">
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
-                                                    {hotel.name}
-                                                </h3>
-                                                <p className="text-gray-600 mb-4 flex items-center">
-                                                    <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    </svg>
-                                                    {hotel.location}
+                                    {/* Hotel Info */}
+                                    <div className="p-5">
+                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
+                                            {filteredHotels[1].name}
+                                        </h3>
+                                        <p className="text-gray-600 mb-3 flex items-center text-sm">
+                                            <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            {filteredHotels[1].location}
+                                        </p>
+
+                                        {/* Amenities */}
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            {filteredHotels[1].amenities.slice(0, 3).map((amenity) => (
+                                                <span
+                                                    key={amenity}
+                                                    className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
+                                                >
+                                                    {amenity}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        {/* Price and Button */}
+                                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                                            <div>
+                                                <p className="text-xs text-gray-500">Starting from</p>
+                                                <p className="text-xl font-bold text-gray-900">
+                                                    ${filteredHotels[1].price}
+                                                    <span className="text-sm font-normal text-gray-500">/night</span>
                                                 </p>
-
-                                                {/* Amenities */}
-                                                <div className="flex flex-wrap gap-2 mb-4">
-                                                    {hotel.amenities.slice(0, 3).map((amenity) => (
-                                                        <span
-                                                            key={amenity}
-                                                            className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
-                                                        >
-                                                            {amenity}
-                                                        </span>
-                                                    ))}
-                                                    {hotel.amenities.length > 3 && (
-                                                        <span className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
-                                                            +{hotel.amenities.length - 3}
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Price and Button */}
-                                                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                                    <div>
-                                                        <p className="text-sm text-gray-500">Starting from</p>
-                                                        <p className="text-2xl font-bold text-gray-900">
-                                                            ${hotel.price}
-                                                            <span className="text-sm font-normal text-gray-500">/night</span>
-                                                        </p>
-                                                    </div>
-                                                    <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
-                                                        Book Now
-                                                    </button>
-                                                </div>
                                             </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
+                                            <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-2.5 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+                                                Book Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* Small Card - Bottom Middle */}
+                            {filteredHotels.length > 2 && (
+                                <motion.div
+                                    key={filteredHotels[2].id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: 0.2 }}
+                                    className="md:col-span-3 md:row-span-1 group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                                >
+                                    {/* Background Image */}
+                                    <img
+                                        src={filteredHotels[2].image}
+                                        alt={filteredHotels[2].name}
+                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
+
+                                    {/* Gradient Overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                                    {/* Content Overlay */}
+                                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                                        <div className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30 self-start">
+                                            <span className="text-xs font-semibold text-white">{filteredHotels[2].amenities.length} room(s)</span>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-yellow-400 transition-colors duration-300">
+                                                {filteredHotels[2].name}
+                                            </h3>
+                                            <p className="text-white/90 text-sm mb-2">{filteredHotels[2].type}</p>
+                                            <p className="text-lg font-bold text-white">
+                                                ${filteredHotels[2].price}
+                                                <span className="text-xs font-normal text-white/80">/night</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
                             )}
                         </>
                     )}
