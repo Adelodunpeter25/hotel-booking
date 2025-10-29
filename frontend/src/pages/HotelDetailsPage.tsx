@@ -13,7 +13,6 @@ const HotelDetailsPage = () => {
     const [children, setChildren] = useState(0);
     const [rooms, setRooms] = useState(1);
 
-    // Sample hotel data
     const hotel = {
         id: 1,
         name: 'Grand Plaza Hotel',
@@ -55,10 +54,9 @@ const HotelDetailsPage = () => {
         <div className="min-h-screen bg-gray-50">
             <Header />
 
-            {/* Hero Image Gallery */}
-            <div className="pt-14 md:pt-16">
-                <div className="max-w-7xl mx-auto px-4 py-6">
-                    {/* Back to Home Button */}
+            <div className="pt-20 pb-8">
+                <div className="max-w-7xl mx-auto px-4">
+                    {/* Back Button */}
                     <button
                         onClick={() => navigate('/')}
                         className="flex items-center space-x-2 text-gray-700 hover:text-yellow-600 font-medium mb-4 transition duration-200"
@@ -68,299 +66,343 @@ const HotelDetailsPage = () => {
                         </svg>
                         <span>Back to Home</span>
                     </button>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-2 h-[400px] md:h-[500px]">
+
+                    {/* Compact Image Gallery */}
+                    <div className="mb-6">
+                        {/* Mobile Carousel */}
+                        <div className="md:hidden relative h-[300px] rounded-xl overflow-hidden">
+                            <div className="flex transition-transform duration-300 ease-out h-full"
+                                style={{ transform: `translateX(-${selectedImage * 100}%)` }}
+                            >
+                                {hotel.images.map((image, index) => (
+                                    <img
+                                        key={index}
+                                        src={image}
+                                        alt={`Hotel ${index + 1}`}
+                                        loading={index === 0 ? 'eager' : 'lazy'}
+                                        className="w-full h-full object-cover flex-shrink-0"
+                                    />
+                                ))}
+                            </div>
+                            {/* Navigation Dots */}
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                {hotel.images.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setSelectedImage(index)}
+                                        className={`w-2 h-2 rounded-full transition-all ${
+                                            selectedImage === index ? 'bg-yellow-500 w-6' : 'bg-white/60'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+                            {/* Swipe Arrows */}
+                            {selectedImage > 0 && (
+                                <button
+                                    onClick={() => setSelectedImage(selectedImage - 1)}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                            )}
+                            {selectedImage < hotel.images.length - 1 && (
+                                <button
+                                    onClick={() => setSelectedImage(selectedImage + 1)}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Desktop Gallery */}
+                        <div className="hidden md:flex gap-2 h-[350px]">
                         {/* Main Image */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="md:col-span-3 rounded-2xl overflow-hidden cursor-pointer group relative"
-                        >
+                        <div className="flex-1 rounded-xl overflow-hidden">
                             <img
                                 src={hotel.images[selectedImage]}
                                 alt={hotel.name}
                                 loading="eager"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                        </motion.div>
-
-                        {/* Thumbnail Images */}
-                        <div className="hidden md:flex flex-col gap-2">
-                            {hotel.images.slice(0, 4).map((image, index) => (
-                                <motion.div
+                        </div>
+                        {/* Thumbnails */}
+                        <div className="hidden md:grid grid-rows-4 gap-2 w-32">
+                            {hotel.images.map((image, index) => (
+                                <div
                                     key={index}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
                                     onClick={() => setSelectedImage(index)}
-                                    className={`flex-1 rounded-xl overflow-hidden cursor-pointer ${
-                                        selectedImage === index ? 'ring-4 ring-yellow-500' : ''
+                                    className={`rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
+                                        selectedImage === index ? 'ring-4 ring-yellow-500 scale-105' : 'hover:ring-2 hover:ring-gray-300'
                                     }`}
                                 >
                                     <img
                                         src={image}
                                         alt={`View ${index + 1}`}
                                         loading="lazy"
-                                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                                        className="w-full h-full object-cover"
                                     />
-                                </motion.div>
+                                </div>
                             ))}
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        {/* Left Column */}
+                        <div className="lg:col-span-2 space-y-6">
+                            {/* Header */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                            >
+                                <div className="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                                            {hotel.name}
+                                        </h1>
+                                        <p className="text-gray-600 flex items-center text-lg">
+                                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            {hotel.location}
+                                        </p>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="flex items-center space-x-2 mb-1">
+                                            <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                            <span className="text-2xl font-bold text-gray-900">{hotel.rating}</span>
+                                        </div>
+                                        <p className="text-sm text-gray-600">{hotel.reviews} reviews</p>
+                                    </div>
+                                </div>
+                                <div className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold">
+                                    {hotel.type}
+                                </div>
+                            </motion.div>
+
+                            {/* Description */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg"
+                            >
+                                <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Hotel</h2>
+                                <p className="text-gray-600 leading-relaxed">{hotel.description}</p>
+                            </motion.div>
+
+                            {/* Amenities */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg"
+                            >
+                                <h2 className="text-2xl font-bold text-gray-900 mb-6">Amenities</h2>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    {hotel.amenities.map((amenity, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex flex-col items-center text-center p-4 rounded-xl bg-gray-50 hover:bg-yellow-50 transition-colors duration-200"
+                                        >
+                                            <span className="text-3xl mb-2">{amenity.icon}</span>
+                                            <span className="text-sm font-medium text-gray-700">{amenity.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Room Types */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                                className="bg-white rounded-2xl p-6 shadow-lg"
+                            >
+                                <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Rooms</h2>
+                                <div className="space-y-4">
+                                    {hotel.rooms.map((room, index) => (
+                                        <div
+                                            key={index}
+                                            className="border border-gray-200 rounded-xl p-5 hover:border-yellow-500 transition-colors duration-200"
+                                        >
+                                            <div className="flex justify-between items-start mb-3">
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-2">{room.type}</h3>
+                                                    <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                                                        <span className="flex items-center">
+                                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                                            </svg>
+                                                            {room.size}
+                                                        </span>
+                                                        <span className="flex items-center">
+                                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                                            </svg>
+                                                            {room.beds}
+                                                        </span>
+                                                        <span className="flex items-center">
+                                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                            </svg>
+                                                            Up to {room.guests} guests
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p className="text-2xl font-bold text-gray-900">
+                                                        ${room.price}
+                                                        <span className="text-sm font-normal text-gray-500">/night</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded-lg transition duration-200">
+                                                Select Room
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Right Column - Sticky Booking Card */}
+                        <div className="lg:col-span-1 lg:self-start">
+                            <div className="lg:sticky lg:top-20">
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                    className="bg-white rounded-2xl p-5 shadow-2xl"
+                                >
+                                <div className="mb-5">
+                                    <p className="text-sm text-gray-600 mb-1">Starting from</p>
+                                    <p className="text-3xl font-bold text-gray-900">
+                                        ${hotel.price}
+                                        <span className="text-base font-normal text-gray-500">/night</span>
+                                    </p>
+                                </div>
+
+                                <form onSubmit={handleBooking} className="space-y-3">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Check-in
+                                        </label>
+                                        <input
+                                            type="date"
+                                            value={checkIn}
+                                            onChange={(e) => setCheckIn(e.target.value)}
+                                            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Check-out
+                                        </label>
+                                        <input
+                                            type="date"
+                                            value={checkOut}
+                                            onChange={(e) => setCheckOut(e.target.value)}
+                                            className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Guests
+                                        </label>
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-sm text-gray-700">Adults</span>
+                                                <div className="flex items-center space-x-3">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setAdults(Math.max(1, adults - 1))}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="w-8 text-center font-medium">{adults}</span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setAdults(adults + 1)}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-sm text-gray-700">Children</span>
+                                                <div className="flex items-center space-x-3">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setChildren(Math.max(0, children - 1))}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="w-8 text-center font-medium">{children}</span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setChildren(children + 1)}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-sm text-gray-700">Rooms</span>
+                                                <div className="flex items-center space-x-3">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setRooms(Math.max(1, rooms - 1))}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="w-8 text-center font-medium">{rooms}</span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setRooms(rooms + 1)}
+                                                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+                                    >
+                                        Book Now
+                                    </button>
+                                </form>
+                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left Column - Hotel Info */}
-                    <div className="lg:col-span-2 space-y-8">
-                        {/* Header */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <div className="flex items-start justify-between mb-4">
-                                <div>
-                                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                                        {hotel.name}
-                                    </h1>
-                                    <p className="text-gray-600 flex items-center text-lg">
-                                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                        {hotel.location}
-                                    </p>
-                                </div>
-                                <div className="text-right">
-                                    <div className="flex items-center space-x-2 mb-1">
-                                        <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <span className="text-2xl font-bold text-gray-900">{hotel.rating}</span>
-                                    </div>
-                                    <p className="text-sm text-gray-600">{hotel.reviews} reviews</p>
-                                </div>
-                            </div>
-
-                            <div className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold">
-                                {hotel.type}
-                            </div>
-                        </motion.div>
-
-                        {/* Description */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg"
-                        >
-                            <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Hotel</h2>
-                            <p className="text-gray-600 leading-relaxed">{hotel.description}</p>
-                        </motion.div>
-
-                        {/* Amenities */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg"
-                        >
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Amenities</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                {hotel.amenities.map((amenity, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col items-center text-center p-4 rounded-xl bg-gray-50 hover:bg-yellow-50 transition-colors duration-200"
-                                    >
-                                        <span className="text-3xl mb-2">{amenity.icon}</span>
-                                        <span className="text-sm font-medium text-gray-700">{amenity.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Room Types */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg"
-                        >
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Rooms</h2>
-                            <div className="space-y-4">
-                                {hotel.rooms.map((room, index) => (
-                                    <div
-                                        key={index}
-                                        className="border border-gray-200 rounded-xl p-5 hover:border-yellow-500 transition-colors duration-200"
-                                    >
-                                        <div className="flex justify-between items-start mb-3">
-                                            <div>
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2">{room.type}</h3>
-                                                <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                                                    <span className="flex items-center">
-                                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                                                        </svg>
-                                                        {room.size}
-                                                    </span>
-                                                    <span className="flex items-center">
-                                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                                        </svg>
-                                                        {room.beds}
-                                                    </span>
-                                                    <span className="flex items-center">
-                                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                                        </svg>
-                                                        Up to {room.guests} guests
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div className="text-right">
-                                                <p className="text-2xl font-bold text-gray-900">
-                                                    ${room.price}
-                                                    <span className="text-sm font-normal text-gray-500">/night</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded-lg transition duration-200">
-                                            Select Room
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    </div>
-
-                    {/* Right Column - Booking Card */}
-                    <div className="lg:col-span-1">
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-5 shadow-2xl mt-8 lg:mt-0"
-                        >
-                            <div className="mb-5">
-                                <p className="text-sm text-gray-600 mb-1">Starting from</p>
-                                <p className="text-3xl font-bold text-gray-900">
-                                    ${hotel.price}
-                                    <span className="text-base font-normal text-gray-500">/night</span>
-                                </p>
-                            </div>
-
-                            <form onSubmit={handleBooking} className="space-y-3">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Check-in
-                                    </label>
-                                    <input
-                                        type="date"
-                                        value={checkIn}
-                                        onChange={(e) => setCheckIn(e.target.value)}
-                                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Check-out
-                                    </label>
-                                    <input
-                                        type="date"
-                                        value={checkOut}
-                                        onChange={(e) => setCheckOut(e.target.value)}
-                                        className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Guests
-                                    </label>
-                                    <div className="space-y-2">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-sm text-gray-700">Adults</span>
-                                            <div className="flex items-center space-x-3">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setAdults(Math.max(1, adults - 1))}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    -
-                                                </button>
-                                                <span className="w-8 text-center font-medium">{adults}</span>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setAdults(adults + 1)}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    +
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-sm text-gray-700">Children</span>
-                                            <div className="flex items-center space-x-3">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setChildren(Math.max(0, children - 1))}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    -
-                                                </button>
-                                                <span className="w-8 text-center font-medium">{children}</span>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setChildren(children + 1)}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    +
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-sm text-gray-700">Rooms</span>
-                                            <div className="flex items-center space-x-3">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setRooms(Math.max(1, rooms - 1))}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    -
-                                                </button>
-                                                <span className="w-8 text-center font-medium">{rooms}</span>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setRooms(rooms + 1)}
-                                                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-yellow-500 hover:text-yellow-600 transition"
-                                                >
-                                                    +
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
-                                >
-                                    Book Now
-                                </button>
-                            </form>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
 
             <Footer />
         </div>
