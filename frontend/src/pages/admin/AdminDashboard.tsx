@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import MetricCard from '../../components/admin/MetricCard';
 import MonthlyChart from '../../components/admin/MonthlyChart';
+import BookingsTab from '../../components/admin/BookingsTab';
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
@@ -258,64 +259,11 @@ const AdminDashboard = () => {
                                 <MonthlyChart />
                             </div>
                         </div>
-
-                        {/* Recent Bookings Table */}
-                        <div className="bg-white rounded-2xl shadow-md p-6">
-                            <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-xl font-bold text-gray-900">Recent Bookings</h2>
-                                <button className="text-sm text-gray-500 hover:text-gray-700 font-medium">
-                                    View All
-                                </button>
-                            </div>
-                            <div className="overflow-x-auto">
-                                <table className="w-full">
-                                    <thead>
-                                        <tr className="border-b border-gray-200">
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-500">Guest</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-500">Hotel</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-500">Date</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-500">Amount</th>
-                                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-500">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {recentBookings.map((booking) => (
-                                            <tr key={booking.id} className="border-b border-gray-100 hover:bg-gray-50 transition">
-                                                <td className="py-4 px-4 font-medium text-gray-900">{booking.guest}</td>
-                                                <td className="py-4 px-4 text-gray-600">{booking.hotel}</td>
-                                                <td className="py-4 px-4 text-gray-600">{booking.date}</td>
-                                                <td className="py-4 px-4 font-semibold text-gray-900">{booking.amount}</td>
-                                                <td className="py-4 px-4">
-                                                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                                                        booking.status === 'Confirmed'
-                                                            ? 'bg-green-50 text-green-600'
-                                                            : booking.status === 'Pending'
-                                                            ? 'bg-orange-50 text-orange-600'
-                                                            : 'bg-red-50 text-red-600'
-                                                    }`}>
-                                                        {booking.status}
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </motion.div>
                 )}
 
                 {/* Bookings Tab */}
-                {activeTab === 'bookings' && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl shadow-md p-6"
-                    >
-                        <h2 className="text-xl font-bold text-gray-900 mb-4">All Bookings</h2>
-                        <p className="text-gray-500">Bookings management coming soon...</p>
-                    </motion.div>
-                )}
+                {activeTab === 'bookings' && <BookingsTab />}
 
                 {/* Hotels Tab */}
                 {activeTab === 'hotels' && (
