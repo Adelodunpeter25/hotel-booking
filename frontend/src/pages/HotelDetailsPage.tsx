@@ -79,6 +79,7 @@ const HotelDetailsPage = () => {
                             <img
                                 src={hotel.images[selectedImage]}
                                 alt={hotel.name}
+                                loading="eager"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
@@ -100,6 +101,7 @@ const HotelDetailsPage = () => {
                                     <img
                                         src={image}
                                         alt={`View ${index + 1}`}
+                                        loading="lazy"
                                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                                     />
                                 </motion.div>

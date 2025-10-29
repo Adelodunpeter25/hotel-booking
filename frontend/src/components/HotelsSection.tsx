@@ -132,6 +132,7 @@ const HotelsSection = () => {
                                 <img
                                     src={filteredHotels[0].image}
                                     alt={filteredHotels[0].name}
+                                    loading="lazy"
                                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
 
@@ -189,6 +190,7 @@ const HotelsSection = () => {
                                     <img
                                         src={filteredHotels[1].image}
                                         alt={filteredHotels[1].name}
+                                        loading="lazy"
                                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
 
@@ -237,6 +239,7 @@ const HotelsSection = () => {
                                     <img
                                         src={filteredHotels[2].image}
                                         alt={filteredHotels[2].name}
+                                        loading="lazy"
                                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
 
