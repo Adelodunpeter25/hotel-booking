@@ -285,9 +285,11 @@ const HotelsSection = () => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-center mt-12"
                 >
-                    <button className="bg-gray-900 hover:bg-black text-white font-semibold px-8 py-3.5 rounded-lg transition duration-200 shadow-lg hover:shadow-xl">
-                        View All Hotels
-                    </button>
+                    <a href="/hotels">
+                        <button className="bg-gray-900 hover:bg-black text-white font-semibold px-8 py-3.5 rounded-lg transition duration-200 shadow-lg hover:shadow-xl">
+                            View All Hotels
+                        </button>
+                    </a>
                 </motion.div>
             </div>
         </section>
