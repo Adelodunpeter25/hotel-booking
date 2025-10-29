@@ -10,9 +10,11 @@ const Header = () => {
                     <div className="flex justify-center items-center h-14 md:h-16 relative">
                         {/* Logo - Positioned on the left */}
                         <div className="absolute left-0">
-                            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-                                LuxeStay
-                            </h1>
+                            <a href="/">
+                                <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent cursor-pointer">
+                                    LuxeStay
+                                </h1>
+                            </a>
                         </div>
 
                         {/* Desktop Navigation - Centered */}
