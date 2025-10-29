@@ -55,7 +55,7 @@ const HotelDetailsPage = () => {
             <Header />
 
             <div className="pt-20 pb-8">
-                <div className="max-w-7xl mx-auto px-4">
+                <div className="max-w-7xl mx-auto px-6 md:px-8">
                     {/* Back Button */}
                     <button
                         onClick={() => navigate('/')}
