@@ -20,13 +20,13 @@ const Header = () => {
                             <a href="/" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
                                 Home
                             </a>
-                            <a href="#hotels" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
+                            <a href="/hotels" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
                                 Hotels
                             </a>
-                            <a href="#about" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
+                            <a href="/about" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
                                 About
                             </a>
-                            <a href="#contact" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
+                            <a href="/contact" className="text-gray-700 hover:text-yellow-600 transition duration-200 font-medium">
                                 Contact
                             </a>
                         </div>
@@ -100,21 +100,21 @@ const Header = () => {
                                         Home
                                     </a>
                                     <a
-                                        href="#hotels"
+                                        href="/hotels"
                                         className="text-gray-700 hover:text-yellow-600 hover:bg-gray-50 transition duration-200 font-medium px-4 py-3 rounded-lg"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         Hotels
                                     </a>
                                     <a
-                                        href="#about"
+                                        href="/about"
                                         className="text-gray-700 hover:text-yellow-600 hover:bg-gray-50 transition duration-200 font-medium px-4 py-3 rounded-lg"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         About
                                     </a>
                                     <a
-                                        href="#contact"
+                                        href="/contact"
                                         className="text-gray-700 hover:text-yellow-600 hover:bg-gray-50 transition duration-200 font-medium px-4 py-3 rounded-lg"
                                         onClick={() => setIsMenuOpen(false)}
                                     >

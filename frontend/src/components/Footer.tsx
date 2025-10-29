@@ -35,22 +35,22 @@ const Footer = () => {
                         <h4 className="text-white font-semibold mb-4">Support</h4>
                         <ul className="space-y-2">
                             <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
+                                <a href="/contact" className="text-sm hover:text-yellow-500 transition duration-200">
                                     Help Center
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
+                                <a href="/contact" className="text-sm hover:text-yellow-500 transition duration-200">
                                     Contact Us
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
+                                <a href="/privacy" className="text-sm hover:text-yellow-500 transition duration-200">
                                     Privacy Policy
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="text-sm hover:text-yellow-500 transition duration-200">
+                                <a href="/terms" className="text-sm hover:text-yellow-500 transition duration-200">
                                     Terms of Service
                                 </a>
                             </li>
