@@ -33,11 +33,18 @@ const Header = () => {
                             </a>
                         </div>
 
-                        {/* Sign In Button - Positioned on the right */}
-                        <div className="absolute right-0 hidden md:block">
-                            <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-2 rounded-lg transition duration-200">
-                                Sign In
-                            </button>
+                        {/* Auth Buttons - Positioned on the right */}
+                        <div className="absolute right-0 hidden md:flex items-center space-x-3">
+                            <a href="/login">
+                                <button className="text-gray-700 hover:text-yellow-600 font-semibold px-4 py-2 rounded-lg transition duration-200">
+                                    Login
+                                </button>
+                            </a>
+                            <a href="/signup">
+                                <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-2 rounded-lg transition duration-200">
+                                    Sign Up
+                                </button>
+                            </a>
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -126,10 +133,17 @@ const Header = () => {
                             </div>
 
                             {/* Sidebar Footer */}
-                            <div className="p-4 border-t border-gray-200">
-                                <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-3 rounded-lg transition duration-200 w-full">
-                                    Sign In
-                                </button>
+                            <div className="p-4 border-t border-gray-200 space-y-2">
+                                <a href="/login">
+                                    <button className="text-gray-700 hover:text-yellow-600 font-semibold px-6 py-3 rounded-lg transition duration-200 w-full border border-gray-300">
+                                        Login
+                                    </button>
+                                </a>
+                                <a href="/signup">
+                                    <button className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-semibold px-6 py-3 rounded-lg transition duration-200 w-full">
+                                        Sign Up
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,13 @@ const TermsPage = () => {
 
             <div className="pt-20 pb-16">
                 <div className="max-w-4xl mx-auto px-4">
+                    <a href="/" className="inline-flex items-center space-x-2 text-gray-700 hover:text-yellow-600 font-medium mb-6 transition duration-200">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span>Back to Home</span>
+                    </a>
+                    
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
