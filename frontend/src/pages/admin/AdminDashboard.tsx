@@ -5,6 +5,7 @@ import AdminSidebar from '../../components/admin/AdminSidebar';
 import MetricCard from '../../components/admin/MetricCard';
 import MonthlyChart from '../../components/admin/MonthlyChart';
 import BookingsTab from '../../components/admin/BookingsTab';
+import HotelsTab from '../../components/admin/HotelsTab';
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
@@ -174,11 +175,11 @@ const AdminDashboard = () => {
     ];
 
     const recentBookings = [
-        { id: 1, guest: 'John Doe', hotel: 'Grand Plaza Hotel', date: '2025-11-05', amount: '$299', status: 'Confirmed' },
-        { id: 2, guest: 'Jane Smith', hotel: 'Paradise Resort', date: '2025-11-08', amount: '$450', status: 'Pending' },
-        { id: 3, guest: 'Mike Johnson', hotel: 'City Stay Inn', date: '2025-11-10', amount: '$45', status: 'Confirmed' },
-        { id: 4, guest: 'Sarah Williams', hotel: 'Royal Palace Hotel', date: '2025-11-12', amount: '$550', status: 'Confirmed' },
-        { id: 5, guest: 'Tom Brown', hotel: 'Skyline Business Center', date: '2025-11-15', amount: '$189', status: 'Canceled' },
+        { id: 1, guest: 'John Doe', room: 'Super Deluxe Twin', date: '2025-11-05', amount: '$299', status: 'Confirmed' },
+        { id: 2, guest: 'Jane Smith', room: 'Luxury Suite', date: '2025-11-08', amount: '$450', status: 'Pending' },
+        { id: 3, guest: 'Mike Johnson', room: 'Superior Premium Room', date: '2025-11-10', amount: '$45', status: 'Confirmed' },
+        { id: 4, guest: 'Sarah Williams', room: 'Balcony Executive Room', date: '2025-11-12', amount: '$550', status: 'Confirmed' },
+        { id: 5, guest: 'Tom Brown', room: 'Deluxe Single Room', date: '2025-11-15', amount: '$189', status: 'Canceled' },
     ];
 
     return (
@@ -266,21 +267,7 @@ const AdminDashboard = () => {
                 {activeTab === 'bookings' && <BookingsTab />}
 
                 {/* Hotels Tab */}
-                {activeTab === 'hotels' && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl shadow-md p-6"
-                    >
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-bold text-gray-900">Hotels Management</h2>
-                            <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-lg transition">
-                                Add Hotel
-                            </button>
-                        </div>
-                        <p className="text-gray-500">Hotels management coming soon...</p>
-                    </motion.div>
-                )}
+                {activeTab === 'hotels' && <HotelsTab />}
 
                 {/* Users Tab */}
                 {activeTab === 'users' && (
